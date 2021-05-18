@@ -14,7 +14,7 @@ sv_help = '''
 
 sv = Service(
     name = 'rank表',  #功能名
-    use_priv = priv.NORMAL, #使用权限   
+    use_priv = priv.NORMAL, #使用权限
     manage_priv = priv.ADMIN, #管理权限
     visible = True, #是否可见
     enable_on_default = True, #是否默认启用
@@ -115,11 +115,22 @@ async def rank_sheet(bot, ev):
     is_jp = match.group(2) == "日"
     is_tw = match.group(2) == "台"
     is_cn = match.group(2) and match.group(2) in "国陆b"
-    if not is_jp and not is_tw and not is_cn:
-        await bot.send(ev, "\n请问您要查询哪个服务器的rank表？\n*日rank表\n*台rank表\n*陆rank表", at_sender=True)
-        return
     msg = []
     msg.append("\n")
+    if not is_jp and not is_tw and not is_cn:
+        rank_config_path = path.join(path.abspath(path.dirname(__file__)),"cache","cn.json")
+        rank_config = None
+        with open(rank_config_path,"r",encoding="utf8")as fp:
+            rank_config = json.load(fp)
+        rank_imgs = []
+        for img_name in rank_config["files"]:
+            rank_imgs.append(f'file:///{path.join(path.dirname(__file__),"cache","pic",f"cn_{img_name}")}')
+        msg.append(rank_config["notice"])
+        for rank_img in rank_imgs:
+            msg.append(f"[CQ:image,file={rank_img}]")
+        await bot.send(ev, "".join(msg), at_sender=True)
+        # await bot.send(ev, "\n请问您要查询哪个服务器的rank表？\n*日rank表\n*台rank表\n*陆rank表", at_sender=True)
+
     if is_jp:
         rank_config_path = path.join(path.abspath(path.dirname(__file__)),"cache","jp.json")
         rank_config = None
@@ -213,11 +224,11 @@ async def show_all_rank_source(bot, ev):
     for uo in res["ranks"]["channels"]["stable"]["cn"]:
         msg.append(uo["name"])
         msg.append("   ")
-    msg.append("\n台服:\n") 
+    msg.append("\n台服:\n")
     for uo in res["ranks"]["channels"]["stable"]["tw"]:
         msg.append(uo["name"])
         msg.append("   ")
-    msg.append("\n日服:\n") 
+    msg.append("\n日服:\n")
     for uo in res["ranks"]["channels"]["stable"]["jp"]:
         msg.append(uo["name"])
         msg.append("   ")
@@ -225,15 +236,15 @@ async def show_all_rank_source(bot, ev):
     for uo in res["ranks"]["channels"]["auto_update"]["cn"]:
         msg.append(uo["name"])
         msg.append("   ")
-    msg.append("\n台服:\n") 
+    msg.append("\n台服:\n")
     for uo in res["ranks"]["channels"]["auto_update"]["tw"]:
         msg.append(uo["name"])
         msg.append("   ")
-    msg.append("\n日服:\n") 
+    msg.append("\n日服:\n")
     for uo in res["ranks"]["channels"]["auto_update"]["jp"]:
         msg.append(uo["name"])
         msg.append("   ")
-    msg.append("\n如需修改更新源，请使用命令[设置rank更新源 国/台/日 稳定/自动更新 源名称]") 
+    msg.append("\n如需修改更新源，请使用命令[设置rank更新源 国/台/日 稳定/自动更新 源名称]")
     await bot.send(ev, "".join(msg), at_sender=True)
 
 @sv.on_rex(r'^设置rank更新源 (.{0,5}) (.{0,10}) (.{0,20})$')
