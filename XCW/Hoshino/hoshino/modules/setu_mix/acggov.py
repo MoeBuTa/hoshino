@@ -192,7 +192,7 @@ async def query_ranking_setu(number: int) -> (int, str):
             }
         try:
             async with aiohttp.ClientSession(headers=acggov_headers) as session:
-                async with session.get(url, params=params, proxy=get_config('acggov', 'acggov_proxy')) as resp:
+                async with session.get(url, params=params, proxy=get_config('acggov', 'acggov_proxy'), ssl=False) as resp:
                     data = await resp.json(content_type='application/json')
         except Exception as _:
             traceback.print_exc()
@@ -217,7 +217,7 @@ async def download_acggov_image(url: str):
     print('acggov downloading image', url)
     try:
         async with aiohttp.ClientSession(headers=acggov_headers) as session:
-            async with session.get(url, proxy=get_config('acggov', 'acggov_proxy')) as resp:
+            async with session.get(url, proxy=get_config('acggov', 'acggov_proxy'), ssl=False) as resp:
                 data = await resp.read()
                 #转jpg
                 byte_stream = io.BytesIO(data)

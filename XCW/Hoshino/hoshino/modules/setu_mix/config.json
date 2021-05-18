@@ -13,7 +13,7 @@
     "lolicon": {
         "mode": 2,
         "apikey": "",
-        "r18": true,
+        "r18": false,
         "use_thumb": false,
         "pixiv_direct": false,
         "pixiv_proxy": ""
