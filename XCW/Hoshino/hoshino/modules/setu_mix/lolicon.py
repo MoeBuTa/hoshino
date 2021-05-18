@@ -73,7 +73,7 @@ async def query_setu(r18 = 0, keyword=None):
 
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(url, params=params) as resp:
+            async with session.get(url, params=params, ssl=False) as resp:
                 data = await resp.json(content_type='application/json')
     except Exception:
         traceback.print_exc()
@@ -101,7 +101,7 @@ async def download_image(url: str):
     print('lolicon downloading image', url)
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(url) as resp:
+            async with session.get(url, ssl=False) as resp:
                 data = await resp.read()
                 #转jpg
                 byte_stream = io.BytesIO(data)
@@ -123,7 +123,7 @@ async def download_pixiv_image(url: str, id):
         }
     try:
         async with aiohttp.ClientSession(headers=headers) as session:
-            async with session.get(url, proxy=get_config('lolicon', 'pixiv_proxy')) as resp:
+            async with session.get(url, proxy=get_config('lolicon', 'pixiv_proxy'), ssl=False) as resp:
                 data = await resp.read()
                 #转jpg
                 byte_stream = io.BytesIO(data)

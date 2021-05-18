@@ -80,7 +80,7 @@ async def query_ranking(date: str, page: int) -> dict:
     data = {}
     try:
         async with aiohttp.ClientSession(headers=acggov_headers) as session:
-            async with session.get(url, params=params, proxy=get_config('acggov', 'acggov_proxy')) as resp:
+            async with session.get(url, params=params, proxy=get_config('acggov', 'acggov_proxy'), ssl=False) as resp:
                 data = await resp.json(content_type='application/json')
                 ranking_list[date][page] = data
     except:
@@ -93,7 +93,7 @@ async def query_setu():
     image = generate_image_struct()
     try:
         async with aiohttp.ClientSession(headers=acggov_headers) as session:
-            async with session.get('https://api.acgmx.com/public/setu', proxy=get_config('acggov', 'acggov_proxy')) as resp:
+            async with session.get('https://api.acgmx.com/public/setu', proxy=get_config('acggov', 'acggov_proxy'), ssl=False) as resp:
                 data = await resp.json(content_type='application/json')
     except Exception:
         traceback.print_exc()
@@ -128,7 +128,7 @@ async def query_search(keyword):
         }
     try:
         async with aiohttp.ClientSession(headers=acggov_headers) as session:
-            async with session.get(url, params=params, proxy=get_config('acggov', 'acggov_proxy')) as resp:
+            async with session.get(url, params=params, proxy=get_config('acggov', 'acggov_proxy'), ssl=False) as resp:
                 data = await resp.json(content_type='application/json')
     except Exception:
         traceback.print_exc()
@@ -239,7 +239,7 @@ async def download_pixiv_image(url: str, id):
         }
     try:
         async with aiohttp.ClientSession(headers=headers) as session:
-            async with session.get(url, proxy=get_config('acggov', 'pixiv_proxy')) as resp:
+            async with session.get(url, proxy=get_config('acggov', 'pixiv_proxy'), ssl=False) as resp:
                 data = await resp.read()
                 #转jpg
                 byte_stream = io.BytesIO(data)
