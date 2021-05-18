@@ -6,13 +6,13 @@
 ###################################
 '''---hoshino监听的端口与ip-----'''
 PORT = 8888           #本条请保持默认
-HOST = '127.0.0.1'      # 本条请保持默认,本地部署使用此条配置（QQ客户端和bot端运行在同一台计算机）
+HOST = '0.0.0.0'      # 本条请保持默认,本地部署使用此条配置（QQ客户端和bot端运行在同一台计算机）
 # HOST = '0.0.0.0'      # 开放公网访问使用此条配置（不安全）
 ###################################
 DEBUG = False           # 调试模式,不建议开启
 ###################################
 '''---拥有最高权限的用户们的QQ---'''
-SUPERUSERS = [892761997]    # 填写超级用户的QQ号，可填多个用半角逗号","隔开
+SUPERUSERS = [892761997,1059231176]    # 填写超级用户的QQ号，可填多个用半角逗号","隔开
 PYS ={}            #高级权限用户的QQ号
 ###################################
 '''---------昵称及网址----------'''
@@ -35,8 +35,8 @@ shitu_api,相关插件shitu,申请地址http://saucenao.com/
 jjc_api,相关插件arena,申请地址https://www.pcrdfans.com/bot
 tenxun_api,相关插件aichat,申请地址https://ai.qq.com/,已经为你默认准备了一个,但建议自行申请进行个性定制
 '''
-lolicon_api = ''                                        
-acggov_api = '' 
+lolicon_api = '6180712060a35c10812f83'                                        
+acggov_api = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2VidXRhIiwidXVpZCI6ImZkNmJmN2I1ZjJlNzRmODk5ODEwYzBiNWQyMGNlMWZhIiwiaWF0IjoxNjIxMzIxNDg4LCJhY2NvdW50Ijoie1wiZW1haWxcIjpcIjEwNTkyMzExNzZAcXEuY29tXCIsXCJnZW5kZXJcIjotMSxcImhhc1Byb25cIjowLFwiaWRcIjo5MTcsXCJwYXNzV29yZFwiOlwiZWRhNjI2ODFjZWI5NGJmYjU0NGE5NjhhOTA1MDkzNjJcIixcInN0YXR1c1wiOjAsXCJ1c2VyTmFtZVwiOlwibW9lYnV0YVwifSIsImp0aSI6IjkxNyJ9.uWSXIIstbrTRZfEqhaYzZFhWB9mGQmG_JmpVn37g98A' 
 shitu_api = ''                                     
 jjc_api = ""
 tenxun_api_ID = '2154581933'   #仅供测试用的默认apikey，画像：名字：冰川镜华 年龄：8岁

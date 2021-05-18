@@ -12,5 +12,12 @@
     "lolicon_r18": true,
     "acggov": true,
     "xml": false
+  },
+  "818087352": {
+    "withdraw": 0,
+    "lolicon": 818087352,
+    "lolicon_r18": false,
+    "acggov": false,
+    "xml": false
   }
 }
