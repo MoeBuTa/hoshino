@@ -11,7 +11,7 @@
         "acggov": false
     },
     "lolicon": {
-        "mode": 1,
+        "mode": 2,
         "apikey": "",
         "r18": true,
         "use_thumb": false,
@@ -19,7 +19,7 @@
         "pixiv_proxy": ""
     },
     "acggov": {
-        "mode": 1,
+        "mode": 2,
         "apikey": "",
         "ranking_mode": "daily",
         "use_thumb": false,

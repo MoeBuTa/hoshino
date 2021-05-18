@@ -68,8 +68,8 @@ async def query_setu(r18 = 0, keyword=None):
         params['keyword'] = keyword
     if get_config('lolicon', 'use_thumb'):
         params['size1200'] = 'true'
-    # if get_config('lolicon', 'pixiv_direct'):
-    #     params['proxy'] = 'disable'
+    if get_config('lolicon', 'pixiv_direct'):
+        params['proxy'] = 'disable'
 
     try:
         async with aiohttp.ClientSession() as session:
