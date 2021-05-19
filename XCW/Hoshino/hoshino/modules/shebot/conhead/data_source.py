@@ -83,7 +83,7 @@ async def detect_face(imgb64: str) -> dict:
         "image" : imgb64,
         "image_type" : "BASE64",
         "face_field" : "face_type,eye_status,landmark",
-        "max_face_num" : 3
+        "max_face_num" : 10
         }
     async with  aiohttp.ClientSession() as session:
         async with session.post(api_url, data = data, ssl=False) as resp:
