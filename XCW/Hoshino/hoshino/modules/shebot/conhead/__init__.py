@@ -63,7 +63,7 @@ async def concat_head(bot: HoshinoBot, ev: CQEvent):
     # download picture and generate base64 str
     # b百度人脸识别api好像无法使用QQ图片服务器的图片，所以使用base64
     async with  aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
+        async with session.get(url, ssl=False) as resp:
             cont = await resp.read()
             b64 = (base64.b64encode(cont)).decode()
             img = Image.open(BytesIO(cont))
