@@ -41,9 +41,9 @@ shitu_api = ''
 jjc_api = "dPOGRX7F"
 tenxun_api_ID = '2154581933'  # 仅供测试用的默认apikey，画像：名字：冰川镜华 年龄：8岁
 tenxun_api_KEY = 'gtv1yCMqKSKSoeuD'  # 建议更换
-baidu_api_ID = ''
-baidu_api_KEY = ''
-baidu_api_SECRET = ''
+baidu_api_ID = '24200997'
+baidu_api_KEY = 'DdW9r8G1GDjMGFQfvPQwuoLr'
+baidu_api_SECRET = 'MjmAns1RRGDQMYhaGa0X3ujA8q1KOQ4G'
 ###################################
 '''-----------pixiv账号----------'''
 pixiv_id = ''  # pixiv账号,无需会员
@@ -131,7 +131,7 @@ MODULES_ON = {
     # 'pcravatarguesskiller',#人机猜头像，通常用于群有两个及以上Bot
     # 'pcrdescguesskiller',#人机猜角色，通常用于群有两个及以上Bot
     'pcr_calendar',  # 全服务器通用日历表，关键词为日历
-    # 'shebot',#插件合集，来源https://github.com/pcrbot/plugins-for-Hoshino,其中的接头需要百度云api
+    'shebot',#插件合集，来源https://github.com/pcrbot/plugins-for-Hoshino,其中的接头需要百度云api
     'weather',  # 天气插件
     # 'snitchgenerator',#需要安装字体，位于XCW\hoshino\hoshino\modules\snitchgenerator\fonts
     # 'xcw',#数个插件的混合，需要xcw资源包配合链接：https://pan.baidu.com/s/1tb0skZTs8NSHYZ-Tm3Cs0w 提取码：2333
