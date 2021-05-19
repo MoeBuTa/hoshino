@@ -24,9 +24,10 @@ ranking_date = None
 acggov_headers = {
     'token': config.acggov_api,
     'referer': 'https://www.acgmx.com/'
-    }
+}
 
 native_info = {}
+
 
 def load_native_info(sub_dir):
     info = {}
@@ -34,7 +35,7 @@ def load_native_info(sub_dir):
     res = R.img(path)
     if not os.path.exists(res.path):
         return info
-    fnlist =  os.listdir(res.path)
+    fnlist = os.listdir(res.path)
 
     for fn in fnlist:
         s = fn.split('.')
@@ -52,6 +53,7 @@ def load_native_info(sub_dir):
     print('read', len(info), 'setu from', sub_dir)
     return info
 
+
 def generate_image_struct():
     return {
         'id': 0,
@@ -63,7 +65,8 @@ def generate_image_struct():
         'native': False,
     }
 
-#读取排行榜
+
+# 读取排行榜
 async def query_ranking(date: str, page: int) -> dict:
     if date not in ranking_list:
         ranking_list[date] = {}
@@ -75,8 +78,8 @@ async def query_ranking(date: str, page: int) -> dict:
         'mode': get_config('acggov', 'ranking_mode'),
         'date': date,
         'per_page': get_config('acggov', 'per_page'),
-        'page': page+1,
-        }
+        'page': page + 1,
+    }
     data = {}
     try:
         async with aiohttp.ClientSession(headers=acggov_headers) as session:
@@ -87,13 +90,15 @@ async def query_ranking(date: str, page: int) -> dict:
         traceback.print_exc()
     return data
 
-#获取随机色图
+
+# 获取随机色图
 async def query_setu():
     data = {}
     image = generate_image_struct()
     try:
         async with aiohttp.ClientSession(headers=acggov_headers) as session:
-            async with session.get('https://api.acgmx.com/public/setu', proxy=get_config('acggov', 'acggov_proxy'), ssl=False) as resp:
+            async with session.get('https://api.acgmx.com/public/setu', proxy=get_config('acggov', 'acggov_proxy'),
+                                   ssl=False) as resp:
                 data = await resp.json(content_type='application/json')
     except Exception:
         traceback.print_exc()
@@ -108,15 +113,18 @@ async def query_setu():
     image['title'] = data['title']
     image['author'] = data['user']['name']
     for tag in data['tags']:
+        if tag['name'] == "R-18" and tag['name'] == "全裸":
+            return False
         image['tags'].append(tag['name'])
     if get_config('acggov', 'use_thumb'):
         image['url'] = data['large']
     else:
-        num = random.randint(0, int(data['pageCount'])-1)
+        num = random.randint(0, int(data['pageCount']) - 1)
         image['url'] = data['originals'][num]['url']
     return image
 
-#获取搜索结果
+
+# 获取搜索结果
 async def query_search(keyword):
     data = {}
     image_list = []
@@ -125,7 +133,7 @@ async def query_search(keyword):
     params = {
         'q': keyword,
         'offset': 0,
-        }
+    }
     try:
         async with aiohttp.ClientSession(headers=acggov_headers) as session:
             async with session.get(url, params=params, proxy=get_config('acggov', 'acggov_proxy'), ssl=False) as resp:
@@ -139,31 +147,36 @@ async def query_search(keyword):
         return image_list
 
     for item in data['illusts']:
-        image = generate_image_struct()
-        image['id'] = item['id']
-        image['title'] = item['title']
-        image['author'] = item['user']['name']
+        flag = False
         for tag in item['tags']:
-            image['tags'].append(tag['name'])
-        try:
-            if get_config('acggov', 'use_thumb'):
-                image['url'] = item['image_urls']['large']
+            if tag['name'] == "R-18" and tag['name'] == "全裸":
+                flag = True
+                break
             else:
-                if item['page_count'] == 1:
-                    image['url'] = item['meta_single_page']['original_image_url']
+                image['tags'].append(tag['name'])
+        if not flag:
+            image = generate_image_struct()
+            image['id'] = item['id']
+            image['title'] = item['title']
+            image['author'] = item['user']['name']
+            try:
+                if get_config('acggov', 'use_thumb'):
+                    image['url'] = item['image_urls']['large']
                 else:
-                    num = random.randint(0, item['page_count']-1)
-                    image['url'] = item['meta_pages'][num]['image_urls']['original']
-        except:
-            pass
-        if image['url']:
-            image_list.append(image)
+                    if item['page_count'] == 1:
+                        image['url'] = item['meta_single_page']['original_image_url']
+                    else:
+                        num = random.randint(0, item['page_count'] - 1)
+                        image['url'] = item['meta_pages'][num]['image_urls']['original']
+            except:
+                pass
+            if image['url']:
+                image_list.append(image)
     print('搜索结果数量', len(data['illusts']))
     return image_list
 
 
-
-#获取排行榜图片
+# 获取排行榜图片
 async def query_ranking_setu(number: int) -> (int, str):
     image = generate_image_struct()
 
@@ -179,6 +192,8 @@ async def query_ranking_setu(number: int) -> (int, str):
     image['title'] = data['response'][0]['works'][number]['work']['title']
     image['author'] = data['response'][0]['works'][number]['work']['user']['name']
     for tag in data['response'][0]['works'][number]['work']['tags']:
+        if tag['name'] == "R-18" and tag['name'] == "全裸":
+            return False
         image['tags'].append(tag)
 
     if get_config('acggov', 'use_thumb'):
@@ -189,10 +204,11 @@ async def query_ranking_setu(number: int) -> (int, str):
         params = {
             'illustId': illust,
             'reduction': 'true',
-            }
+        }
         try:
             async with aiohttp.ClientSession(headers=acggov_headers) as session:
-                async with session.get(url, params=params, proxy=get_config('acggov', 'acggov_proxy'), ssl=False) as resp:
+                async with session.get(url, params=params, proxy=get_config('acggov', 'acggov_proxy'),
+                                       ssl=False) as resp:
                     data = await resp.json(content_type='application/json')
         except Exception as _:
             traceback.print_exc()
@@ -207,11 +223,12 @@ async def query_ranking_setu(number: int) -> (int, str):
             image['url'] = data['illust']['meta_single_page']['original_image_url']
         else:
             meta_pages = data['illust']['meta_pages']
-            num = random.randint(0, len(meta_pages)-1)
+            num = random.randint(0, len(meta_pages) - 1)
             image['url'] = meta_pages[num]['image_urls']['original']
-    
+
     image['id'] = illust
     return image
+
 
 async def download_acggov_image(url: str):
     print('acggov downloading image', url)
@@ -219,7 +236,7 @@ async def download_acggov_image(url: str):
         async with aiohttp.ClientSession(headers=acggov_headers) as session:
             async with session.get(url, proxy=get_config('acggov', 'acggov_proxy'), ssl=False) as resp:
                 data = await resp.read()
-                #转jpg
+                # 转jpg
                 byte_stream = io.BytesIO(data)
                 roiImg = Image.open(byte_stream)
                 if roiImg.mode != 'RGB':
@@ -227,21 +244,22 @@ async def download_acggov_image(url: str):
                 imgByteArr = io.BytesIO()
                 roiImg.save(imgByteArr, format='JPEG')
                 return imgByteArr.getvalue()
-    except :
+    except:
         print('download image failed')
-        #traceback.print_exc()
+        # traceback.print_exc()
     return None
+
 
 async def download_pixiv_image(url: str, id):
     print('acggov downloading pixiv image', url)
     headers = {
         'referer': f'https://www.pixiv.net/member_illust.php?mode=medium&illust_id={id}'
-        }
+    }
     try:
         async with aiohttp.ClientSession(headers=headers) as session:
             async with session.get(url, proxy=get_config('acggov', 'pixiv_proxy'), ssl=False) as resp:
                 data = await resp.read()
-                #转jpg
+                # 转jpg
                 byte_stream = io.BytesIO(data)
                 roiImg = Image.open(byte_stream)
                 if roiImg.mode != 'RGB':
@@ -249,10 +267,11 @@ async def download_pixiv_image(url: str, id):
                 imgByteArr = io.BytesIO()
                 roiImg.save(imgByteArr, format='JPEG')
                 return imgByteArr.getvalue()
-    except :
+    except:
         print('download image failed')
-        #traceback.print_exc()
+        # traceback.print_exc()
     return None
+
 
 def save_image(image, mode='acggov'):
     path = f'setu_mix/{mode}/{image["id"]}'
@@ -271,9 +290,10 @@ def save_image(image, mode='acggov'):
     with open(res.path, 'w', encoding='utf8') as f:
         json.dump(info, f, ensure_ascii=False, indent=2)
 
+
 async def get_setu_online():
     image = await query_setu()
-    #检查本地是否存在该图片
+    # 检查本地是否存在该图片
     path = f'setu_mix/acggov/{image["id"]}.jpg'
     res = R.img(path)
     if os.path.exists(res.path):
@@ -291,7 +311,8 @@ async def get_setu_online():
             save_image(image)
     return image
 
-def get_setu_native(uid = 0):
+
+def get_setu_native(uid=0):
     image = generate_image_struct()
 
     path = f'setu_mix/acggov'
@@ -317,19 +338,20 @@ def get_setu_native(uid = 0):
             image['data'] = f.read()
         with open(res.path + '.json', encoding='utf8') as f:
             d = json.load(f)
-            for k,v in d.items():
+            for k, v in d.items():
                 image[k] = v
     except:
         pass
-    
+
     return image
+
 
 async def search_setu_online(keyword, num):
     image_list = await query_search(keyword)
     valid_list = []
     while len(image_list) > 0:
         image = image_list.pop(random.randint(0, len(image_list) - 1))
-        #检查本地是否存在该图片
+        # 检查本地是否存在该图片
         path = f'setu_mix/acggov/{image["id"]}.jpg'
         res = R.img(path)
         if os.path.exists(res.path):
@@ -353,6 +375,7 @@ async def search_setu_online(keyword, num):
             break
     return valid_list
 
+
 def search_setu_native(keyword, num):
     image = generate_image_struct()
     result_list = []
@@ -369,6 +392,7 @@ def search_setu_native(keyword, num):
             image_list.append(image)
     return image_list
 
+
 async def acggov_get_setu():
     if get_config('acggov', 'mode') >= 2:
         return get_setu_native()
@@ -376,6 +400,7 @@ async def acggov_get_setu():
         return await get_setu_online()
     else:
         return None
+
 
 async def acggov_search_setu(keyword, num):
     if get_config('acggov', 'mode') == 1 or get_config('acggov', 'mode') == 2:
@@ -385,7 +410,8 @@ async def acggov_search_setu(keyword, num):
     else:
         return None
 
-#获取排行榜
+
+# 获取排行榜
 async def acggov_get_ranking(page: int = 0) -> (int, str):
     date = (datetime.datetime.now() + datetime.timedelta(days=-2)).strftime("%Y-%m-%d")
     data = await query_ranking(date, page)
@@ -402,7 +428,8 @@ async def acggov_get_ranking(page: int = 0) -> (int, str):
     msg += f'第{current}页，共{str(pages)}页'
     return msg
 
-#获取排行榜图片
+
+# 获取排行榜图片
 async def acggov_get_ranking_setu(number: int) -> (int, str):
     image = await query_ranking_setu(number)
 
@@ -427,7 +454,7 @@ async def acggov_get_ranking_setu(number: int) -> (int, str):
             save_image(image)
 
     return image
-        
+
 
 async def acggov_fetch_process():
     global ranking_date
