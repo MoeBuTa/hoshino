@@ -19,5 +19,19 @@
     "lolicon_r18": false,
     "acggov": false,
     "xml": false
+  },
+  "1033552551": {
+    "withdraw": 0,
+    "lolicon": true,
+    "lolicon_r18": false,
+    "acggov": false,
+    "xml": false
+  },
+  "1040875906": {
+    "withdraw": 0,
+    "lolicon": true,
+    "lolicon_r18": false,
+    "acggov": false,
+    "xml": false
   }
 }
