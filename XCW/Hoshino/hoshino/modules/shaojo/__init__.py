@@ -32,8 +32,7 @@ async def my_shoujo(bot, ev: CQEvent):
     msg = inst.format_msg(uid, name)
     await bot.send(ev, msg)
 
-@sv.on_prefix('今天你是什么几把')
-@sv.on_suffix('今天你是什么几把')
+
 @sv.on_prefix('今天你是什么少女')
 @sv.on_suffix('今天你是什么少女')
 async def other_shoujo(bot, ev: CQEvent):
