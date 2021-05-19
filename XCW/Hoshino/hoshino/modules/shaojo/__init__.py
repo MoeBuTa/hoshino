@@ -33,6 +33,8 @@ async def my_shoujo(bot, ev: CQEvent):
     await bot.send(ev, msg)
 
 
+@sv.on_prefix('今天你是什么')
+@sv.on_suffix('今天你是什么')
 @sv.on_prefix('今天你是什么少女')
 @sv.on_suffix('今天你是什么少女')
 async def other_shoujo(bot, ev: CQEvent):
