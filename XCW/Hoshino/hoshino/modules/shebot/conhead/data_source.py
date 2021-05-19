@@ -86,7 +86,7 @@ async def detect_face(imgb64: str) -> dict:
         "max_face_num" : 3
         }
     async with  aiohttp.ClientSession() as session:
-        async with session.post(api_url, data = data) as resp:
+        async with session.post(api_url, data = data, ssl=False) as resp:
             text = await resp.text()
             data = json.loads(text)
             if data['error_msg'] == 'SUCCESS':
