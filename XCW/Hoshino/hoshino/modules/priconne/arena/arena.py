@@ -136,8 +136,7 @@ async def do_query(id_list, user_id, region=1):
             "https://api.pcrdfans.com/x/v1/search",
             headers=header,
             json=payload,
-            timeout=10,
-            ssl=False
+            timeout=10
         )
         res = await resp.json()
         logger.debug(f"len(res)={len(res)}")
