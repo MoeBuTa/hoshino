@@ -137,6 +137,7 @@ async def do_query(id_list, user_id, region=1):
             headers=header,
             json=payload,
             timeout=10,
+            ssl=False
         )
         res = await resp.json()
         logger.debug(f"len(res)={len(res)}")
