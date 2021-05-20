@@ -461,6 +461,6 @@ async def send_random_setu(bot, ev):
     data_all=[data1,data2,data3,data4,data5,data6,data7,data8,data9]
     await bot.send_group_forward_msg(group_id=ev['group_id'], messages=data_all)
 
-# @sv.scheduled_job('interval', minutes=30)
-# async def job():
-#     await fetch_process()
+@sv.scheduled_job('interval', minutes=1440)
+async def job():
+    await fetch_process()
