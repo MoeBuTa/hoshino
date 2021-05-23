@@ -96,7 +96,7 @@ MODULES_ON = {
     'ontree_scheduler',  # 挂树优化提醒
     'eqa',  # 问答功能2
     'russian',  # 俄罗斯轮盘赌
-    # 'explosion',#每天一发惠惠
+    'explosion',#每天一发惠惠
     'boxcolle',  # BOX查询
     'timeline',  # 轴上传
     'picapi',  # 自定义拉取图片
@@ -145,6 +145,7 @@ MODULES_ON = {
     'pcr-rank',  # 自动更新rank
     'pcravatarfind',  # 找头像
     'shaojo',
+    'shitu'
 }
 
 version = 'hoshino_xcw_1.0'
