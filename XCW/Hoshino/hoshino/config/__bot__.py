@@ -37,7 +37,7 @@ tenxun_api,相关插件aichat,申请地址https://ai.qq.com/,已经为你默认�
 '''
 lolicon_api = '6180712060a35c10812f83'                                        
 acggov_api = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2VidXRhIiwidXVpZCI6ImZkNmJmN2I1ZjJlNzRmODk5ODEwYzBiNWQyMGNlMWZhIiwiaWF0IjoxNjIxMzIxNDg4LCJhY2NvdW50Ijoie1wiZW1haWxcIjpcIjEwNTkyMzExNzZAcXEuY29tXCIsXCJnZW5kZXJcIjotMSxcImhhc1Byb25cIjowLFwiaWRcIjo5MTcsXCJwYXNzV29yZFwiOlwiZWRhNjI2ODFjZWI5NGJmYjU0NGE5NjhhOTA1MDkzNjJcIixcInN0YXR1c1wiOjAsXCJ1c2VyTmFtZVwiOlwibW9lYnV0YVwifSIsImp0aSI6IjkxNyJ9.uWSXIIstbrTRZfEqhaYzZFhWB9mGQmG_JmpVn37g98A' 
-shitu_api = ''                                     
+shitu_api = '79b720631de6e2b222f3dc9491aa47f4369f1eb3'
 jjc_api = "dPOGRX7F"
 tenxun_api_ID = '2154581933'  # 仅供测试用的默认apikey，画像：名字：冰川镜华 年龄：8岁
 tenxun_api_KEY = 'gtv1yCMqKSKSoeuD'  # 建议更换
