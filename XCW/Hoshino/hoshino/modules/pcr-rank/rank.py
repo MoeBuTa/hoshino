@@ -1,7 +1,7 @@
 import os
 from hoshino import Service, priv
 from hoshino.priv import *
-from hoshino import aiorequests
+from hoshino import aiorequests, R
 from os import path
 import json, hoshino
 from nonebot import scheduler
@@ -124,12 +124,11 @@ async def rank_local(bot, ev):
         await load_config()
     msg = []
     msg.append("\n")
-    dir_path = os.path.join(os.path.expanduser(hoshino.config.RES_DIR), 'img', 'muyu')
-    file_path1 = os.path.join(dir_path, f'R13-4-1.jpg')
-    file_path2 = os.path.join(dir_path, f'R13-4-2.jpg')
-    rank_imgs = []
-    rank_imgs.append(f'file:///{file_path1}')
-    rank_imgs.append(f'file:///{file_path2}')
+    file_path1 = os.path.abspath(
+        os.path.join(os.path.expanduser(hoshino.config.RES_DIR), 'img', 'muyu', f"R13-4-1.jpg"))
+    file_path2 = os.path.abspath(
+        os.path.join(os.path.expanduser(hoshino.config.RES_DIR), 'img', 'muyu', f"R13-4-2.jpg"))
+    rank_imgs = [f'file:///{file_path1}', f'file:///{file_path2}']
     msg.append("R13-4")
     for rank_img in rank_imgs:
         msg.append(f"[CQ:image,file={rank_img}]")
