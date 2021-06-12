@@ -117,6 +117,16 @@ async def update_cache(force_update: bool = False):
     await update_rank_pic_cache(force_update)
     sv.logger.info("Rank表缓存更新完毕")
 
+@sv.on_fullmatch("作业")
+async def rank_local(bot, ev):
+    if config == None:
+        await load_config()
+    msg = []
+    msg.append("\n")
+    msg.append("https://docs.qq.com/sheet/DWkdtR2djbnFiUGRk?tdsourcetag=s_pcqq_send_grpfile&ADUIN=1059231176&ADSESSION=1623508391&ADTAG=CLIENT.QQ.5803_.0&ADPUBNO=27129&tab=ltc6xo")
+    await bot.send(ev, "".join(msg), at_sender=True)
+
+
 
 @sv.on_fullmatch("rank")
 async def rank_local(bot, ev):
