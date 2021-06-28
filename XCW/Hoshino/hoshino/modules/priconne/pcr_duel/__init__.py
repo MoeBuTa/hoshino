@@ -49,7 +49,7 @@ DUEL_DAILY_LIMIT = 30 #每个人每日发起决斗上限
 QIDAO_DAILY_LIMIT = 10 #祈祷上限
 CHONGSHENG_DAILY_LIMIT = 3 #重生上限
 RESET_HOUR = 0  # 每日使用次数的重置时间，0代表凌晨0点，1代表凌晨1点，以此类推
-GACHA_COST = 3000  # 抽老婆需求
+GACHA_COST = 200  # 抽老婆需求
 ZERO_GET_AMOUNT = 500  # 没钱补给量
 WIN_NUM = 1 #下注获胜赢得的倍率
 BREAK_UP_SWITCH = True #分手系统开关
@@ -68,10 +68,10 @@ LEVEL_GIRL_NEED = {
 LEVEL_COST_DICT = {
         "1": 0,
         "2": 1000,
-        "3": 3000,
-        "4": 50000,
-        "5": 700000,
-        "6": 9000000
+        "3": 2000,
+        "4": 3000,
+        "5": 6000,
+        "6": 10000
     } # 升级所需要的钱钱，格式为["等级“: 需求]
 Addgirlfail = [
     '你参加了一场贵族舞会，热闹的舞会场今天竟然没人同你跳舞',
@@ -1107,7 +1107,7 @@ async def noblelogin(bot, ev: CQEvent):
     cidlist = duel._get_cards(gid, uid)
     cidnum = len(cidlist)
     #女友工作收入
-    score3 = 1500*cidnum
+    score3 = 100*cidnum
     scoresum = score1+score2+score3
     score_counter._add_score(gid, uid, scoresum)
     
@@ -2010,7 +2010,7 @@ async def breakup(bot, ev: CQEvent):
         if cid == 1000:
             await bot.finish(ev, '请输入正确的pcr角色名', at_sender=True)
         score_counter = ScoreCounter2()
-        needscore = 3000+10**level
+        needscore = 100+10**level
         score = score_counter._get_score(gid, uid)
         cidlist = duel._get_cards(gid, uid)
         if cid not in cidlist:
