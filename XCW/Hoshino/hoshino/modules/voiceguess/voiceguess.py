@@ -185,6 +185,6 @@ async def on_input_chara_name(bot, ev: CQEvent):
         score_counter = pcr_duel.ScoreCounter2()
         if duel._get_level(ev.group_id, ev.user_id) != 0:
             score_counter._add_score(ev.group_id, ev.user_id, 100)
-            msg_part3 = f'{user_card}获得了{100}金币'
+            msg_part3 = f'获得了{100}金币'
         msg = f"正确答案是: {c.name}{c.icon.cqcode}\n{MessageSegment.at(ev.user_id)}猜对了，真厉害！TA已经猜对{n}次了~\n{msg_part2}\n{msg_part3}"
         await bot.send(ev, msg)
