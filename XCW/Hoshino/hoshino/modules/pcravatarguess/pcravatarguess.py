@@ -1,5 +1,6 @@
 from nonebot import MessageSegment
-
+from hoshino.modules.priconne.pcr_duel import ScoreCounter2 as score_counter
+from hoshino.modules.priconne.pcr_duel import DuelCounter as duel
 from hoshino import Service, priv, util, jewel
 from hoshino.typing import CQEvent
 from hoshino.modules.priconne import chara
@@ -120,7 +121,7 @@ def uid2card(uid, user_card_dict):
     return str(uid) if uid not in user_card_dict.keys() else user_card_dict[uid]
 
 
-@sv.on_fullmatch(('猜头像排行榜', '猜头像群排行'))
+@sv.on_fullmatch(('猜头像排行', '猜头像排行榜', '猜头像群排行'))
 async def description_guess_group_ranking(bot, ev: CQEvent):
     try:
         user_card_dict = await get_user_card_dict(bot, ev.group_id)
@@ -175,6 +176,9 @@ async def avatar_guess(bot, ev: CQEvent):
 async def on_input_chara_name(bot, ev: CQEvent):
     try:
         if winner_judger.get_on_off_status(ev.group_id):
+            gid = ev.group_id
+            uid = ev.user_id
+            guid = gid, uid
             s = ev.message.extract_plain_text()
             cid = chara.name2id(s)
             if cid != chara.UNKNOWN and cid == winner_judger.get_correct_chara_id(ev.group_id) and winner_judger.get_winner(ev.group_id) == '':
@@ -190,7 +194,13 @@ async def on_input_chara_name(bot, ev: CQEvent):
                 winning_jewel = 35
                 jewel_counter._add_jewel(ev.group_id, ev.user_id, winning_jewel)
                 msg_part2 = f'{user_card}获得了{winning_jewel}宝石'
-                msg =  f'正确答案是: {c.name}{c.icon.cqcode}\n{msg_part}\n{msg_part2}'
+                msg_part3 = ''
+                if duel._get_level(gid, uid) != 0:
+                    score_counter._add_score(gid, uid, 100)
+                    msg_part3 = f'{user_card}获得了{100}金币'
+                msg =  f'正确答案是: {c.name}{c.icon.cqcode}\n{msg_part}\n{msg_part2}\n{msg_part3}'
                 await bot.send(ev, msg)
+
+
     except Exception as e:
         await bot.send(ev, '错误:\n' + str(e))
