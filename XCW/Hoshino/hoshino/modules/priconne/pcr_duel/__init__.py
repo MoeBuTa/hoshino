@@ -255,7 +255,7 @@ async def duel_help_mowang(bot, ev: CQEvent):
 
 blhxlist = range(6000,6506)
 yozilist = range(1523,1544)
-genshinlist = range(7001,7018)
+genshinlist = range(7001,7020)
 bangdreamlist = range(1601,1636)
 
 
@@ -1178,6 +1178,7 @@ async def add_noble(bot, ev: CQEvent):
             get_score = random.randint(100000,500000)
             score_counter._add_score(gid, uid, get_score)
             famliy = '富可敌国'
+        get_score = 500
         msg = f'\n创建贵族成功！\n您的初始爵位是男爵\n你的家境为{famliy}\n你的启动资金为{get_score}金币\n{girlmsg}'
         await bot.send(ev, msg, at_sender=True)        
             
