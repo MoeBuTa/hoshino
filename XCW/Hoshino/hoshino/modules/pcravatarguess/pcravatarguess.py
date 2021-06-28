@@ -195,8 +195,8 @@ async def on_input_chara_name(bot, ev: CQEvent):
                 jewel_counter._add_jewel(ev.group_id, ev.user_id, winning_jewel)
                 msg_part2 = f'{user_card}获得了{winning_jewel}宝石'
                 msg_part3 = ''
-                if duel._get_level(gid, uid) != 0:
-                    score_counter._add_score(gid, uid, 100)
+                if duel._get_level(ev.group_id, ev.user_id) != 0:
+                    score_counter._add_score(ev.group_id, ev.user_id, 100)
                     msg_part3 = f'{user_card}获得了{100}金币'
                 msg =  f'正确答案是: {c.name}{c.icon.cqcode}\n{msg_part}\n{msg_part2}\n{msg_part3}'
                 await bot.send(ev, msg)
