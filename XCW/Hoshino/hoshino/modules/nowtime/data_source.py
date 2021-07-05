@@ -4,7 +4,7 @@ from PIL import Image, ImageFont, ImageDraw
 
 font_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),"msyh.ttc")
 
-def add_text(template_path,save_path,text:str,textsize:int,font='Arial.ttf',textfill='black',position:tuple=(0,0)):
+def add_text(template_path,save_path,text:str,textsize:int,font='simhei.ttf',textfill='black',position:tuple=(0,0)):
     #textsize 文字大小
     #font 字体，默认微软雅黑
     #textfill 文字颜色，默认黑色
