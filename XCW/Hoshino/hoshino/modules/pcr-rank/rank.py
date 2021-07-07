@@ -124,6 +124,8 @@ async def rank_local(bot, ev):
     msg = []
     msg.append("\n")
     msg.append("https://docs.qq.com/sheet/DWkdtR2djbnFiUGRk?tab=ltc6xo")
+    msg.append("\n")
+    msg.append("https://docs.qq.com/sheet/DWUpVT2RnZUNGbEJh?tab=BB08J2")
     await bot.send(ev, "".join(msg), at_sender=True)
 
 
