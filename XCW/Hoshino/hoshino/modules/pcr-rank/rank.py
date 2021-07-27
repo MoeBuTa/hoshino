@@ -141,7 +141,7 @@ async def rank_local(bot, ev):
     # file_path2 = os.path.abspath(
     #     os.path.join(os.path.expanduser(hoshino.config.RES_DIR), 'img', 'muyu', f"R13-4-2.jpg"))
     rank_imgs = [f'file:///{file_path1}']
-    msg.append("R13-5")
+    msg.append("R14-3")
     for rank_img in rank_imgs:
         msg.append(f"[CQ:image,file={rank_img}]")
     await bot.send(ev, "".join(msg), at_sender=True)
