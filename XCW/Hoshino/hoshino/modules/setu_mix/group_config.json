@@ -21,14 +21,28 @@
     "xml": false
   },
   "1033552551": {
-    "withdraw": 0,
+    "withdraw": false,
     "lolicon": true,
     "lolicon_r18": false,
     "acggov": false,
     "xml": false
   },
   "1040875906": {
-    "withdraw": 0,
+    "withdraw": true,
+    "lolicon": true,
+    "lolicon_r18": false,
+    "acggov": false,
+    "xml": false
+  },
+  "1092066380": {
+    "withdraw": true,
+    "lolicon": true,
+    "lolicon_r18": false,
+    "acggov": false,
+    "xml": false
+  },
+  "949306164": {
+    "withdraw": true,
     "lolicon": true,
     "lolicon_r18": false,
     "acggov": false,

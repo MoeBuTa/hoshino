@@ -71,6 +71,7 @@ RES_URL = 'http://127.0.0.1:5000/static/'
 '''
 ###################################
 MODULES_ON = {
+    'GenshinUID',
     'botmanage',
     'dice',  # 骰子
     'groupmaster',  # 群聊基础功能
@@ -127,7 +128,7 @@ MODULES_ON = {
     'setu_mix',  # 俩涩图插件合二为一
     'hoshino_training',  # 慎重启用,前往https://github.com/zyujs/hoshino_training查看说明
     # 'rss',#适用于Hoshino v2的rss订阅插件,详情https://github.com/zyujs/rss
-    'Genshin',  # 原神系列，其中的genshinuid需要填入你的米游社cookies才能使用
+    #'Genshin',  # 原神系列，其中的genshinuid需要填入你的米游社cookies才能使用
     # 'pcravatarguesskiller',#人机猜头像，通常用于群有两个及以上Bot
     # 'pcrdescguesskiller',#人机猜角色，通常用于群有两个及以上Bot
     'pcr_calendar',  # 全服务器通用日历表，关键词为日历
@@ -145,7 +146,8 @@ MODULES_ON = {
     'pcr-rank',  # 自动更新rank
     'pcravatarfind',  # 找头像
     'shaojo',
-    'shitu'
+    'shitu',
+    'Genshin_Impact_bot'
 }
 
 version = 'hoshino_xcw_1.0'

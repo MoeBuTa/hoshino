@@ -1,0 +1,5 @@
+# !/bin/bash
+cd /home/pi/hoshino_xcw/XCW/Hoshino
+sudo su
+source venv/bin/activate
+python run.py
